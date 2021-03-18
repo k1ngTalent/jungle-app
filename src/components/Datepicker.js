@@ -14,6 +14,12 @@ class CustomDatePicker extends React.Component{
             selectedDateRange:[]
         }
     }
+    static get myConstants() { 
+        return { 
+            minDate :new Date(2020,0,1),
+            maxDate : new Date()
+        } 
+    } 
     handleDateChange = (dateRange) => {
         let startDate = dateRange[0];
         let endDate = dateRange[1];
@@ -36,13 +42,17 @@ class CustomDatePicker extends React.Component{
 
     handleRangeChange=(flag)=>{
         const {selectedStartDate,selectedEndDate}=this.state;
-        if(!selectedStartDate || !selectedStartDate){
+        const {myConstants}=this.constructor;
+        if(!selectedStartDate || !selectedEndDate){
             return
         }
       if(flag == 'prev'){
         let diff = this.dateDiff(selectedStartDate,selectedEndDate);
         let newStartDate = new Date(selectedStartDate).setDate(selectedStartDate.getDate() - (diff.days+1));
         let newEndDate = new Date(selectedEndDate).setDate(selectedEndDate.getDate()-(diff.days+1));
+        if((new Date(newStartDate)< myConstants.minDate) || (new Date(newEndDate)> myConstants.maxDate)){
+            return;
+        }
         let newRange = [new Date(newStartDate),new Date(newEndDate)];
         this.setState({selectedStartDate:new Date(newStartDate),selectedEndDate:new Date(newEndDate),selectedDateRange:newRange});
         return;
@@ -52,6 +62,9 @@ class CustomDatePicker extends React.Component{
         let diff = this.dateDiff(selectedStartDate,selectedEndDate);
         let newStartDate = new Date(selectedStartDate).setDate(selectedStartDate.getDate() + (diff.days+1));
         let newEndDate = new Date(selectedEndDate).setDate(selectedEndDate.getDate() + (diff.days+1));
+        if((new Date(newStartDate)< myConstants.minDate) || (new Date(newEndDate)> myConstants.maxDate)){
+            return;
+        }
         let newRange = [new Date(newStartDate),new Date(newEndDate)];
         this.setState({selectedStartDate:new Date(newStartDate),selectedEndDate:new Date(newEndDate),selectedDateRange:newRange});
         return;
