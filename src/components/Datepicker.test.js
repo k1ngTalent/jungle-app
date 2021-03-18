@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomDatePicker from './Datepicker';
+import CustomDatePicker, { dateDiff } from './Datepicker';
 import {render,within,fireEvent} from '@testing-library/react';
 
 const renderDatePicker = () => render(<CustomDatePicker singleMonthOnly={false}/>);
@@ -45,12 +45,12 @@ describe("test date picker component", () => {
 
         let elements = within(datePickerContainer);
        expect(elements.queryByTestId(IDMAPS.DATEPICKER)).toBeFalsy();
-       
-
        dateSelectorBtn = elements.getByTestId(IDMAPS.DATE_SELECTOR);
        fireEvent.click(dateSelectorBtn);
-
        expect(elements.queryByTestId(IDMAPS.DATEPICKER)).toBeTruthy();
 
-    })
+    });
+    test('date diff function',()=>{
+        expect(dateDiff(new Date(2020,0,1),new Date(2020,0,7)).days).toEqual(6);
+    });
 });
