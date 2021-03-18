@@ -89,16 +89,16 @@ class CustomDatePicker extends React.Component{
 
         ]
         return (
-            <div className="datepicker-container">
+            <div className="datepicker-container" data-testid="datepicker-container">
                 <div className="date-action-container">
-                    <span onClick={()=>{this.handleRangeChange("prev")}} className="prev-button">
+                    <span onClick={()=>{this.handleRangeChange("prev")}} className="prev-button" data-testid="prev-button">
                        {"<"}
                     </span>
-                    <span className="date-selector" onClick={()=>{this.setState({isDatePickerActive:!isDatePickerActive})}}>{this.renderDateSelected(selectedStartDate,selectedEndDate)}</span>
+                    <span className="date-selector" data-testid="date-selector" onClick={()=>{this.setState({isDatePickerActive:!isDatePickerActive})}}>{this.renderDateSelected(selectedStartDate,selectedEndDate)}</span>
                   
-                    <span onClick={()=>{this.handleRangeChange("next")}} className="next-button">{">"}</span>
+                    <span onClick={()=>{this.handleRangeChange("next")}} data-testid="next-button" className="next-button">{">"}</span>
                 </div>
-                {isDatePickerActive &&<div className="datepicker">
+                {isDatePickerActive &&<div className="datepicker" data-testid="datepicker">
                      <DateRangePicker shortcuts={false} onChange={this.handleDateChange} minDate={minDate} maxDate={maxDate} singleMonthOnly={singleMonthOnly} value={selectedDateRange} contiguousCalendarMonths={false}/> 
                 </div>}
             </div>
