@@ -1,5 +1,7 @@
 .App{
   display: flex;
+  overflow: hidden;
+  height: 100vh;
   padding: 1rem;
   justify-content: center;
 }
@@ -25,13 +27,26 @@
 background-color: #ebf1f5;
 }
 .datepicker {
-  position: absolute;
-  background: whitesmoke;
-  border-radius: 4px;
-  padding: 0.5rem;
-  z-index: 2;
+   position: absolute;
+    background: whitesmoke;
+    border-radius: 4px;
+    padding: 0.5rem;
+    z-index: 2;
+    overflow: scroll;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width:497px){
+  .datepicker {
+    width: 100% !important;
+  }
+}
+
+.datepicker .bp3-daterangepicker{
+  overflow: scroll !important;
 }
 
 .datepicker-container{
   position: relative;
+  width: 100%;
 }
