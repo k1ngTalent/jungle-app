@@ -13,9 +13,15 @@
   padding: .4rem 1rem;
   cursor: pointer;
   font-size: 16px;
-  
 }
-.prev-button:hover,.date-selector:hover,.next-button:hover{
+
+.prev-button,.next-button{
+  background-color: #137cbd;
+  border-radius: .3rem;
+  color: #fff;
+  margin: 0 .3rem;
+}
+.date-selector:hover{
 background-color: #ebf1f5;
 }
 .datepicker {
