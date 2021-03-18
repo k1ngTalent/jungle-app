@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Jungle Date picker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple date picker component built using blueprintJs
 
 ## Available Scripts
 
