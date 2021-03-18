@@ -4,6 +4,20 @@ import React from 'react';
 import moment from 'moment';
 
 
+export const dateDiff=(leftRange,rightRange)=>{
+    let data= {};
+
+    data.elapsed = rightRange.getTime() - leftRange.getTime();
+ 
+    data.days = Math.round((((data.elapsed/1000)/60)/60)/24);
+
+    let monthDiff = (rightRange.getMonth()+1) - (leftRange.getMonth()+1);
+    let yearDiff = rightRange.getFullYear() - leftRange.getFullYear();
+    data.months = monthDiff + (yearDiff*12);
+
+    // Return data
+    return data;
+}
 class CustomDatePicker extends React.Component{
     constructor(props) {
         super(props);
@@ -25,20 +39,7 @@ class CustomDatePicker extends React.Component{
         let endDate = dateRange[1];
         this.setState({selectedStartDate:startDate,selectedEndDate:endDate,selectedDateRange:dateRange,boundaryToModify:[startDate,new Date()]});
     }
-    dateDiff=(leftRange,rightRange)=>{
-        let data= {};
-    
-        data.elapsed = rightRange.getTime() - leftRange.getTime();
-     
-        data.days = Math.round((((data.elapsed/1000)/60)/60)/24);
-    
-        let monthDiff = (rightRange.getMonth()+1) - (leftRange.getMonth()+1);
-        let yearDiff = rightRange.getFullYear() - leftRange.getFullYear();
-        data.months = monthDiff + (yearDiff*12);
-    
-        // Return data
-        return data;
-    }
+   
 
     handleRangeChange=(flag)=>{
         const {selectedStartDate,selectedEndDate}=this.state;
@@ -47,7 +48,7 @@ class CustomDatePicker extends React.Component{
             return
         }
       if(flag == 'prev'){
-        let diff = this.dateDiff(selectedStartDate,selectedEndDate);
+        let diff = dateDiff(selectedStartDate,selectedEndDate);
         let newStartDate = new Date(selectedStartDate).setDate(selectedStartDate.getDate() - (diff.days+1));
         let newEndDate = new Date(selectedEndDate).setDate(selectedEndDate.getDate()-(diff.days+1));
         if((new Date(newStartDate)< myConstants.minDate) || (new Date(newEndDate)> myConstants.maxDate)){
@@ -59,7 +60,7 @@ class CustomDatePicker extends React.Component{
       }
 
       if(flag == 'next'){
-        let diff = this.dateDiff(selectedStartDate,selectedEndDate);
+        let diff = dateDiff(selectedStartDate,selectedEndDate);
         let newStartDate = new Date(selectedStartDate).setDate(selectedStartDate.getDate() + (diff.days+1));
         let newEndDate = new Date(selectedEndDate).setDate(selectedEndDate.getDate() + (diff.days+1));
         if((new Date(newStartDate)< myConstants.minDate) || (new Date(newEndDate)> myConstants.maxDate)){
